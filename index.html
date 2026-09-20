@@ -1,261 +1,41 @@
 ---
-layout: none
+layout: default
 ---
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ site.title }}</title>
-<meta name="description" content="{{ site.description | strip_newlines }}">
-<link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-  --black: #1a1a1a;
-  --white: #fafafa;
-  --orange: #8A59F0;
-  --line: #e3e3e0;
-  --muted: #6b6b68;
-  --red: #E1221C;
-  --green: #0C7F4F;
-  --purple: #8A59F0;
-  --blue: #417DF2;
-  --yellow: #FAF505;
-  --mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-}
-* { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body {
-  margin: 0;
-  background: var(--white);
-  color: var(--black);
-  font-family: var(--sans);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-.wrap {
-  max-width: 46rem;
-  margin: 0 auto;
-  padding: 0 24px 96px;
-}
-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-  padding-block: 28px;
-  border-bottom: 1px solid var(--line);
-}
-nav a { color: var(--black); text-decoration: none; }
-nav .brand {
-  font-weight: 600;
-  letter-spacing: -.01em;
-}
-nav .brand span { color: var(--orange); }
-nav .links { display: flex; gap: 24px; flex-wrap: wrap; font-size: .9rem; }
-nav .links a { color: var(--muted); transition: color .15s ease; }
-nav .links a:hover { color: var(--black); }
-header { padding-block: 64px 56px; }
-.eyebrow {
-  font-family: var(--mono);
-  font-size: .8rem;
-  letter-spacing: .02em;
-  color: var(--orange);
-  font-weight: 500;
-}
-h1 {
-  margin: 16px 0 0;
-  font-size: clamp(2.2rem, 6vw, 3.4rem);
-  line-height: 1.08;
-  letter-spacing: -.02em;
-  font-weight: 600;
-}
-.lede {
-  margin: 20px 0 0;
-  max-width: 42ch;
-  font-size: 1.1rem;
-  color: var(--muted);
-}
-.cta { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
-.btn {
-  font-family: var(--sans);
-  font-size: .9rem;
-  font-weight: 500;
-  text-decoration: none;
-  padding: 11px 20px;
-  border-radius: 6px;
-  border: 1px solid var(--black);
-  color: var(--black);
-  background: transparent;
-  transition: background .15s ease, color .15s ease, border-color .15s ease;
-}
-.btn:hover { background: var(--black); color: var(--white); }
-.btn.solid {
-  background: var(--orange);
-  border-color: var(--orange);
-  color: var(--white);
-}
-.btn.solid:hover { background: #7440d6; border-color: #7440d6; }
-.section-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  border-top: 1px solid var(--line);
-  padding-top: 20px;
-  margin-bottom: 24px;
-}
-.section-head h2 {
-  margin: 0;
-  font-family: var(--mono);
-  font-size: .8rem;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 500;
-}
-.section-head a {
-  font-family: var(--mono);
-  font-size: .8rem;
-  color: var(--orange);
-  text-decoration: none;
-}
-.posts { display: grid; gap: 0; }
-.post {
-  --accent: var(--orange);
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  border-bottom: 1px solid var(--line);
-  border-left: 3px solid transparent;
-  padding: 22px 0 22px 16px;
-  transition: opacity .15s ease, border-left-color .15s ease;
-}
-.post:hover { opacity: .68; border-left-color: var(--accent); }
-.posts .post:first-child { padding-top: 0; }
-.post:nth-child(5n+1) { --accent: var(--red); }
-.post:nth-child(5n+2) { --accent: var(--green); }
-.post:nth-child(5n+3) { --accent: var(--purple); }
-.post:nth-child(5n+4) { --accent: var(--blue); }
-.post:nth-child(5n+5) { --accent: #b3ae00; }
-.post .meta {
-  font-family: var(--mono);
-  font-size: .78rem;
-  color: var(--muted);
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.post .meta b { color: var(--accent); font-weight: 500; }
-.post h3 {
-  margin: 8px 0 0;
-  font-size: 1.2rem;
-  letter-spacing: -.01em;
-  font-weight: 600;
-  line-height: 1.3;
-}
-.post p { margin: 6px 0 0; color: var(--muted); font-size: .95rem; max-width: 62ch; }
-.empty {
-  border: 1px dashed var(--line);
-  border-radius: 6px;
-  padding: 28px;
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: .85rem;
-}
-footer {
-  margin-top: 56px;
-  border-top: 1px solid var(--line);
-  padding-top: 24px;
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-  font-family: var(--mono);
-  font-size: .78rem;
-  color: var(--muted);
-}
-footer a { color: var(--muted); text-decoration: none; }
-footer a:hover { color: var(--black); }
-.chips { margin-top: 56px; display: flex; gap: 8px; flex-wrap: wrap; }
-.chip {
-  font-family: var(--mono);
-  font-size: .72rem;
-  letter-spacing: .02em;
-  padding: 7px 12px;
-  border-radius: 999px;
-  color: var(--white);
-  font-weight: 500;
-}
-.chip.c1 { background: var(--red); }
-.chip.c2 { background: var(--green); }
-.chip.c3 { background: var(--purple); }
-.chip.c4 { background: var(--blue); }
-.chip.c5 { background: var(--yellow); color: var(--black); }
-</style>
-</head>
-<body>
-<div class="wrap">
-  <nav>
-    <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}<span>.</span></a>
-    <div class="links">
-      <a href="{{ '/' | relative_url }}">Home</a>
-      <a href="{{ '/about/' | relative_url }}">About</a>
-      <a href="{{ '/feed.xml' | relative_url }}">Feed</a>
-      <a href="https://github.com/{{ site.github_username }}">GitHub</a>
-    </div>
-  </nav>
-
-  <header>
-    <p class="eyebrow">Notes, builds, and things I learn</p>
-    <h1>Writing things down so I stop relearning them.</h1>
-    <p class="lede">{{ site.description | strip_newlines }}</p>
-    <div class="cta">
-      <a class="btn solid" href="#posts">Read the posts</a>
-      <a class="btn" href="{{ '/about/' | relative_url }}">About me</a>
-    </div>
-  </header>
-
-  <section id="posts">
-    <div class="section-head">
-      <h2>Latest</h2>
-      <a href="{{ '/feed.xml' | relative_url }}">Subscribe via RSS</a>
-    </div>
-    <div class="posts">
-      {% for post in site.posts %}
-      <a class="post" href="{{ post.url | relative_url }}">
-        <div class="meta">
-          <span>{{ post.date | date: "%b %-d, %Y" }}</span>
-          {% if post.categories.size > 0 %}<b>{{ post.categories | join: " / " }}</b>{% endif %}
-        </div>
-        <h3>{{ post.title }}</h3>
-        <p>{{ post.excerpt | strip_html | truncate: 170 }}</p>
-      </a>
-      {% else %}
-      <div class="empty">No posts yet. Drop a markdown file in <code>_posts/</code> and it lands here.</div>
-      {% endfor %}
-    </div>
-  </section>
-
-  <div class="chips">
-    <span class="chip c1">#E1221C</span>
-    <span class="chip c2">#0C7F4F</span>
-    <span class="chip c3">#8A59F0</span>
-    <span class="chip c4">#417DF2</span>
-    <span class="chip c5">#FAF505</span>
+<header>
+  <p class="eyebrow">Notes, builds, and things I learn</p>
+  <h1>Writing things down so I stop relearning them.</h1>
+  <p class="lede">{{ site.description | strip_newlines }}</p>
+  <div class="cta">
+    <a class="btn solid" href="#posts">Read the posts</a>
+    <a class="btn" href="{{ '/about/' | relative_url }}">About me</a>
   </div>
+</header>
 
-  <footer>
-    <span>&copy; {{ 'now' | date: "%Y" }} {{ site.title }}</span>
-    <a href="https://github.com/{{ site.github_username }}">github.com/{{ site.github_username }}</a>
-  </footer>
+<section id="posts">
+  <div class="section-head">
+    <h2>Latest</h2>
+    <a href="{{ '/feed.xml' | relative_url }}">Subscribe via RSS</a>
+  </div>
+  <div class="posts">
+    {% for post in site.posts %}
+    <a class="post" href="{{ post.url | relative_url }}">
+      <div class="meta">
+        <span>{{ post.date | date: "%b %-d, %Y" }}</span>
+        {% if post.categories.size > 0 %}<b>{{ post.categories | join: " / " }}</b>{% endif %}
+      </div>
+      <h3>{{ post.title }}</h3>
+      <p>{{ post.excerpt | strip_html | truncate: 170 }}</p>
+    </a>
+    {% else %}
+    <div class="empty">No posts yet. Drop a markdown file in <code>_posts/</code> and it lands here.</div>
+    {% endfor %}
+  </div>
+</section>
+
+<div class="chips">
+  <span class="chip c1">#E1221C</span>
+  <span class="chip c2">#0C7F4F</span>
+  <span class="chip c3">#8A59F0</span>
+  <span class="chip c4">#417DF2</span>
+  <span class="chip c5">#FAF505</span>
 </div>
-</body>
-</html>
