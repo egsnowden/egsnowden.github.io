@@ -1,0 +1,351 @@
+---
+layout: none
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ site.title }}</title>
+<meta name="description" content="{{ site.description | strip_newlines }}">
+<link rel="alternate" type="application/atom+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
+<style>
+:root {
+  --grey-900: #17171a;
+  --grey-800: #1f1f23;
+  --grey-700: #2a2a2f;
+  --grey-600: #3a3a41;
+  --white: #ffffff;
+  --muted: #a8a8b3;
+  --red: #E1221C;
+  --green: #0C7F4F;
+  --purple: #8A59F0;
+  --blue: #417DF2;
+  --yellow: #FAF505;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--grey-800);
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(38rem 38rem at 12% -8%, rgba(225,34,28,.16), transparent 60%),
+    radial-gradient(34rem 34rem at 88% 4%, rgba(65,125,242,.18), transparent 62%),
+    radial-gradient(30rem 30rem at 72% 92%, rgba(138,89,240,.16), transparent 60%),
+    radial-gradient(26rem 26rem at 8% 88%, rgba(12,127,79,.16), transparent 60%);
+}
+.spectrum {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.spectrum i { display: block; }
+.spectrum i:nth-child(1) { background: var(--red); }
+.spectrum i:nth-child(2) { background: var(--green); }
+.spectrum i:nth-child(3) { background: var(--purple); }
+.spectrum i:nth-child(4) { background: var(--blue); }
+.spectrum i:nth-child(5) { background: var(--yellow); }
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 62rem;
+  margin: 0 auto;
+  padding: 0 24px 96px;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-block: 28px 0;
+  font-family: var(--mono);
+  font-size: .8rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+nav a { color: var(--muted); text-decoration: none; }
+nav .brand { color: var(--white); font-weight: 700; }
+nav .brand span { color: var(--yellow); }
+nav .links { display: flex; gap: 20px; flex-wrap: wrap; }
+nav .links a { transition: color .15s ease; }
+nav .links a:nth-child(1):hover { color: var(--red); }
+nav .links a:nth-child(2):hover { color: var(--green); }
+nav .links a:nth-child(3):hover { color: var(--purple); }
+nav .links a:nth-child(4):hover { color: var(--blue); }
+header { padding-block: 88px 72px; }
+.eyebrow {
+  font-family: var(--mono);
+  font-size: .75rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: var(--yellow);
+}
+h1 {
+  margin: 18px 0 0;
+  font-size: clamp(2.6rem, 9vw, 5.4rem);
+  line-height: .96;
+  letter-spacing: -.035em;
+  font-weight: 800;
+}
+h1 em {
+  font-style: normal;
+  background: linear-gradient(92deg, var(--red), var(--purple) 38%, var(--blue) 68%, var(--green));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.lede {
+  margin: 24px 0 0;
+  max-width: 40ch;
+  font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+  color: var(--muted);
+}
+.cta { margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  font-family: var(--mono);
+  font-size: .85rem;
+  letter-spacing: .04em;
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--grey-600);
+  color: var(--white);
+  background: var(--grey-700);
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+.btn:hover { transform: translateY(-2px); border-color: var(--blue); }
+.btn.solid {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--grey-900);
+  font-weight: 700;
+}
+.btn.solid:hover { background: #fff45c; border-color: #fff45c; }
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  border-top: 1px solid var(--grey-600);
+  padding-top: 20px;
+  margin-bottom: 28px;
+}
+.section-head h2 {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: .8rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+.section-head a {
+  font-family: var(--mono);
+  font-size: .78rem;
+  color: var(--blue);
+  text-decoration: none;
+}
+.posts { display: grid; gap: 14px; }
+.post {
+  --accent: var(--blue);
+  position: relative;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: var(--grey-700);
+  border: 1px solid var(--grey-600);
+  border-radius: 14px;
+  padding: 22px 24px 22px 28px;
+  overflow: hidden;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.post::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--accent);
+}
+.post::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: radial-gradient(22rem 12rem at 0% 50%, var(--accent), transparent 70%);
+  transition: opacity .25s ease;
+  pointer-events: none;
+}
+.post:hover { transform: translateX(4px); border-color: var(--accent); }
+.post:hover::after { opacity: .13; }
+.post:nth-child(5n+1) { --accent: var(--red); }
+.post:nth-child(5n+2) { --accent: var(--green); }
+.post:nth-child(5n+3) { --accent: var(--purple); }
+.post:nth-child(5n+4) { --accent: var(--blue); }
+.post:nth-child(5n+5) { --accent: var(--yellow); }
+.post .meta {
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.post .meta b { color: var(--accent); font-weight: 600; }
+.post h3 {
+  margin: 10px 0 0;
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+  letter-spacing: -.015em;
+  line-height: 1.25;
+}
+.post p { margin: 8px 0 0; color: var(--muted); font-size: .95rem; max-width: 62ch; }
+.empty {
+  border: 1px dashed var(--grey-600);
+  border-radius: 14px;
+  padding: 32px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: .85rem;
+}
+.palette { margin-top: 72px; }
+.chips { display: flex; gap: 10px; flex-wrap: wrap; }
+.chip {
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .06em;
+  padding: 8px 14px;
+  border-radius: 999px;
+  color: var(--grey-900);
+  font-weight: 700;
+}
+.chip.c1 { background: var(--red); color: var(--white); }
+.chip.c2 { background: var(--green); color: var(--white); }
+.chip.c3 { background: var(--purple); color: var(--white); }
+.chip.c4 { background: var(--blue); color: var(--white); }
+.chip.c5 { background: var(--yellow); }
+footer {
+  margin-top: 72px;
+  border-top: 1px solid var(--grey-600);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-family: var(--mono);
+  font-size: .75rem;
+  color: var(--muted);
+}
+footer a { color: var(--muted); text-decoration: none; }
+footer a:hover { color: var(--white); }
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+<body>
+<div class="spectrum"><i></i><i></i><i></i><i></i><i></i></div>
+<div class="wrap">
+  <nav>
+    <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}<span>.</span></a>
+    <div class="links">
+      <a href="{{ '/' | relative_url }}">Home</a>
+      <a href="{{ '/about/' | relative_url }}">About</a>
+      <a href="{{ '/feed.xml' | relative_url }}">Feed</a>
+      <a href="https://github.com/{{ site.github_username }}">GitHub</a>
+    </div>
+  </nav>
+
+  <header>
+    <p class="eyebrow">Notes, builds, and things I learn</p>
+    <h1>Writing things down<br><em>so I stop relearning them.</em></h1>
+    <p class="lede">{{ site.description | strip_newlines }}</p>
+    <div class="cta">
+      <a class="btn solid" href="#posts">Read the posts</a>
+      <a class="btn" href="{{ '/about/' | relative_url }}">About me</a>
+    </div>
+  </header>
+
+  <section id="posts">
+    <div class="section-head">
+      <h2>Latest</h2>
+      <a href="{{ '/feed.xml' | relative_url }}">Subscribe via RSS</a>
+    </div>
+    <div class="posts">
+      {% for post in site.posts %}
+      <a class="post reveal" href="{{ post.url | relative_url }}">
+        <div class="meta">
+          <span>{{ post.date | date: "%b %-d, %Y" }}</span>
+          {% if post.categories.size > 0 %}<b>{{ post.categories | join: " / " }}</b>{% endif %}
+        </div>
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.excerpt | strip_html | truncate: 170 }}</p>
+      </a>
+      {% else %}
+      <div class="empty">No posts yet. Drop a markdown file in <code>_posts/</code> and it lands here.</div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="palette">
+    <div class="section-head"><h2>Palette</h2></div>
+    <div class="chips">
+      <span class="chip c1">#E1221C</span>
+      <span class="chip c2">#0C7F4F</span>
+      <span class="chip c3">#8A59F0</span>
+      <span class="chip c4">#417DF2</span>
+      <span class="chip c5">#FAF505</span>
+    </div>
+  </section>
+
+  <footer>
+    <span>&copy; {{ 'now' | date: "%Y" }} {{ site.title }}</span>
+    <a href="https://github.com/{{ site.github_username }}">github.com/{{ site.github_username }}</a>
+  </footer>
+</div>
+<script>
+const io = new IntersectionObserver((entries) => {
+  for (const e of entries) {
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  }
+}, { rootMargin: '0px 0px -8% 0px' });
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  el.style.transitionDelay = `${Math.min(i * 60, 360)}ms`;
+  io.observe(el);
+});
+</script>
+</body>
+</html>
