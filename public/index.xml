@@ -2,21 +2,21 @@
 <rss version="2.0">
     <channel>
       <title>Quartz 5</title>
-      <link>https://evan.github.io</link>
+      <link>https://egsnowden.github.io</link>
       <description>Last 10 notes on Quartz 5</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
     <title>Tag Index</title>
-    <link>https://evan.github.io/tags/</link>
-    <guid>https://evan.github.io/tags/</guid>
+    <link>https://egsnowden.github.io/tags/</link>
+    <guid>https://egsnowden.github.io/tags/</guid>
     <description><![CDATA[  ]]></description>
-    <pubDate>Mon, 21 Sep 2026 15:16:16 GMT</pubDate>
+    <pubDate>Mon, 21 Sep 2026 16:24:08 GMT</pubDate>
   </item><item>
     <title>Welcome to Quartz</title>
-    <link>https://evan.github.io/</link>
-    <guid>https://evan.github.io/</guid>
+    <link>https://egsnowden.github.io/</link>
+    <guid>https://egsnowden.github.io/</guid>
     <description><![CDATA[ This is a blank Quartz installation. See the documentation for how to get started. ]]></description>
-    <pubDate>Mon, 21 Sep 2026 15:16:05 GMT</pubDate>
+    <pubDate>Mon, 21 Sep 2026 15:40:25 GMT</pubDate>
   </item>
     </channel>
   </rss>
