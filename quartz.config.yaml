@@ -99,7 +99,7 @@ plugins:
     enabled: false
     order: 92
   - source: "@quartz-community/quartz-fonts"
-    enabled: true
+    enabled: false
   - source: "@quartz-themes/core"
     enabled: false
     options:
@@ -234,6 +234,20 @@ plugins:
       position: left
       priority: 25
       display: mobile-only
+  - source: github:quartz-community/fonts
+    enabled: true
+    options:
+      fontOrigin: googleFonts
+      title:
+        name: Saira Black
+        includeItalic: true
+      body:
+        name: Saira
+        includeItalic: true
+      header:
+        name: Saira
+      code:
+        name: JetBrains Mono
   - source: "@quartz-community/bases-page"
     enabled: true
     options: {}
